@@ -1,5 +1,12 @@
 import * as BABYLON from 'babylonjs'
+//import "@babylonjs/loaders/glTF";
+import 'babylonjs-loaders';
+import { ArcadeScene } from './arcade';
+import { ARCADE_SCENE_CONFIG, CABINET_MAP } from './config';
+import { WebXRGameController } from './webxr';
+
 export class AppOne {
+
     engine: BABYLON.Engine;
     scene: BABYLON.Scene;
 
@@ -8,8 +15,8 @@ export class AppOne {
         window.addEventListener('resize', () => {
             this.engine.resize();
         });
-        this.scene = createScene(this.engine, this.canvas)
-
+        this.scene = createScene(this.engine, this.canvas);
+        BABYLON.Logger.LogLevels = BABYLON.Logger.AllLogLevel;
     }
 
     debug(debugOn: boolean = true) {
@@ -21,44 +28,53 @@ export class AppOne {
     }
 
     run() {
-        this.debug(true);
+        const isDebug = import.meta.env.DEV;
+        this.debug(isDebug);
         this.engine.runRenderLoop(() => {
             this.scene.render();
         });
     }
-
 }
 
 
-var createScene = function (engine: BABYLON.Engine, canvas: HTMLCanvasElement) {
-    // this is the default code from the playground:
 
-    // This creates a basic Babylon Scene object (non-mesh)
+var createScene = function (engine: BABYLON.Engine, canvas: HTMLCanvasElement) {
+
     var scene = new BABYLON.Scene(engine);
 
-    // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+    //CRTShaderPluginMaterial.register();
 
-    // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
+    const env = scene.createDefaultEnvironment({
+        createGround: true
+    });
+    if (!env) throw new Error("no env");
 
-    // This attaches the camera to the canvas
+    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1.6, -1), scene);
+    camera.setTarget(new BABYLON.Vector3(0, 1.2, 0));
     camera.attachControl(canvas, true);
+    // set free movement to slow
+    camera.speed = 0.1;
+    // set near distance plane
+    camera.minZ = 0.025;
 
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+    new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, -1), scene);
 
-    // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 0.7;
+    let gameController = new WebXRGameController(env, scene);
+    let arcadeScene = new ArcadeScene(ARCADE_SCENE_CONFIG, CABINET_MAP, gameController);
+    arcadeScene.load(scene);
+    
+    gameController.addXR();
 
-    // Our built-in 'sphere' shape.
-    var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
+    // callback every frame
+    scene.onAfterActiveMeshesEvaluationObservable.add(() => {
+        // TODO
+    });
 
-    // Move the sphere upward 1/2 its height
-    sphere.position.y = 1;
-
-    // Our built-in 'ground' shape.
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
+    /*
+    const gl = new BABYLON.GlowLayer("glow", scene);
+    gl.intensity = 20.5;
+    gl.isEnabled = true;
+    */
 
     return scene;
 };

@@ -1,6 +1,6 @@
 {
-  "name": "friends",
-  "version": "0.0.0",
+  "name": "vrarcade",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite --open",
     "build": "tsc && vite build",
@@ -11,10 +11,15 @@
     "src/@types"
   ],
   "devDependencies": {
-    "typescript": "^4.6.2",
-    "vite": "^2.8.6"
+    "gltfpack": "^0.20.0",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.4"
   },
   "dependencies": {
-    "babylonjs": "^4.2.2"
+    "babylonjs": "^6.32.1",
+    "babylonjs-loaders": "^6.32.1",
+    "comlink": "^4.4.1",
+    "earcut": "^2.2.4",
+    "jsnes": "^1.2.1"
   }
 }

@@ -1,51 +1,50 @@
-# BabylonJs + vite Boilerplate
+# 8bitworkshop VR Arcade
+
+Demo: 
+
+* Open the WebXR browser on your VR headset
+* Go to (url)
+
 
 ## Description
 
-This is a BabylonJS + vite minimal boilerplate for development and production to work with **typescript**. 
-It starts faster than webpack and allow debugging from vscode.
+This project uses WebXR to create playable arcade cabinets in immersive augmented reality!
 
-## instructions
+* Use your own ROM
+* Customize your cabinet shape and artwork
+* Place multiple cabinets wherever you want
+* Click the screen to start the game!
+
+
+## Development
 
 - clone or download the repo
-- npm install
+- `npm i`
 - For development: `npm run dev`
-- For production: `npm run build` then to preview what was built `npm run preview`
+- For production: `npm run build` then to preview what was built `npm run preview` (contents are in dist/ folder)
 
-## Development mode and debugging
-First `npm run dev`
-Then in vscode press F5, otherwise just open a browser at http://localhost:3000/
 
-## Live Demo
-You can see this repository live here:
-https://babylonjs-vite-boilerplate.vercel.app/
+## Customization
 
-## Production build
-First `npm run build`
-A `dist` folder is created and contains the distribution. 
-You can `npm run preview` it on your development machine.
-Production preview runs at http://localhost:5000/ . The terminal will display external URLs if you want to test from a phone or tablet.
+To create your own games:
 
-## File Structure
+* Edit [config.ts](src/config.ts) to add your own cabinet definitions.
+* Modify `CABINET_MAP` to map identifiers to cabinet configs.
+* Modify `ARCADE_SCENE_CONFIG` to place cabinets around the room.
 
-### /index.html
-This file is used as a template by vite to create the actual **index.html** that will be served to the client.
+## ROMs
 
-### /public
-This folder contains your html asset. The files in this folder are served by the test webserver as root files.
+Look at `public/games` for ROM and video examples.
+Only the NES platform is supported right now.
 
-### /src 
-This is where you should place all your application code.
+## Parametric model
 
-### /src/main.ts
-This is the entry point of the app. 
+This creates cabinets using JSON objects and a couple of JPG/PNG files.
+Look at `CABINET_SOLARIAN` and `CABINET_CLIMBER` for examples.
+Also look at `public/cabinets` for texture maps.
 
-### /src/AppOne.ts
-A sample app that copy the code from the babylon.js playground.
+## Using your own model (in .glb format)
 
-## Thank you!
+Look at `CABINET_MODEL_BASE` for an example.
+(Model-based cabinets are not used in the current demo.)
 
-Thank you for using it, feel free to contribute in any way you can/want, just keep in mind that this should stay as a very mimimalistic boilerplate. 
-If you'd like to add complexity just fork it and let me know when you're done, so that I might reference it here in case someone comes looking for a more opinionated environment.
-
-Enjoy!
