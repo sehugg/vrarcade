@@ -3,7 +3,14 @@
 Demo: 
 
 * Open the WebXR browser on your VR headset
-* Go to (url)
+* Go to [https://sehugg.github.io/vrarcade](https://sehugg.github.io/vrarcade)
+
+To play a game, point at its screen and pull the trigger.
+
+Control the game with the thumbstick and trigger on your motion controller.
+
+The virtual stick and buttons look nice, but are not yet functional,
+so you can't play with hand-tracking yet.
 
 
 ## Description
