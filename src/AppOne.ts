@@ -72,9 +72,32 @@ var createScene = function (engine: BABYLON.Engine, canvas: HTMLCanvasElement) {
 
     /*
     const gl = new BABYLON.GlowLayer("glow", scene);
-    gl.intensity = 20.5;
+    gl.intensity = 0.5;
     gl.isEnabled = true;
     */
+
+    // neon sign from public/8bitws-neon.png
+    const neonSign = new BABYLON.TransformNode("neon-sign", scene);
+    const neonMat = new BABYLON.StandardMaterial("neon", scene);
+    neonMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+    neonMat.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    neonMat.specularColor = new BABYLON.Color3(0, 0, 0);
+    neonMat.backFaceCulling = false;
+    neonMat.useEmissiveAsIllumination = true;
+    neonMat.useAlphaFromDiffuseTexture = true;
+    const neonTex = new BABYLON.Texture("art/8bitws-neon.png", scene);
+    neonTex.hasAlpha = true;
+    neonMat.diffuseTexture = neonTex;
+    neonMat.emissiveTexture = neonTex;
+    neonMat.transparencyMode = BABYLON.Material.MATERIAL_ALPHABLEND;
+    neonMat.disableLighting = true;
+    const neon = BABYLON.MeshBuilder.CreatePlane("neon", { width: 0.5, height: 0.5, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene);
+    neon.parent = neonSign;
+    neon.position.y = 1.5;
+    neon.position.z = -2.5;
+    neon.rotation.y = Math.PI;
+    neon.material = neonMat;
+    
 
     return scene;
 };

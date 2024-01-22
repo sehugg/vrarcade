@@ -44,7 +44,7 @@ export class CabinetModel {
         // load the side texture
         if (this.config.path && this.config.sideTexture) {
             let sideTexture = new BABYLON.Texture(this.config.path + this.config.sideTexture, scene);
-            sideTexture.hasAlpha = true;
+            sideTexture.hasAlpha = false;
             sideMat.diffuseTexture = sideTexture;
         } else {
             let color = this.config.sideColor;
