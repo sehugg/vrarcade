@@ -71,7 +71,7 @@ export class CabinetModel {
         rightMesh.material = sideMat;
 
         // Create the ribbon path for the body
-        const paths = [];
+        const paths : BABYLON.Vector3[][] = [];
         for (let p of this.config.bodyShape) {
             paths.push([
                 new BABYLON.Vector3(p[0], 0, p[1]),
