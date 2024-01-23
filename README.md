@@ -3,7 +3,7 @@
 Demo: 
 
 * Open the WebXR browser on your VR headset
-* Go to [https://sehugg.github.io/vrarcade](https://sehugg.github.io/vrarcade)
+* Go to [https://sehugg.github.io/vrarcade](https://sehugg.github.io/vrarcade/) (or use [Oculus launch link](https://www.oculus.com/open_url/?url=https://sehugg.github.io/vrarcade/))
 
 To play a game, point at its screen and pull the trigger.
 
